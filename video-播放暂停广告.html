@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>video   </title>
+	<style type="text/css">
+		body{
+			text-align: center;
+		}
+		#video{
+			/*margin:100px auto;text-align: center;*/
+			position: relative;
+			width:856px;
+			height:481px;
+			margin:0 auto;
+		}
+		.diyControl {
+			
+			position: absolute;
+			top:50%;	
+			left:50%;
+			margin-left:-60px;
+			margin-top:-60px;
+			/*display:none;*/
+			/*border: 1px solid red;*/
+
+		}
+		.diyControl img{
+			width:120px;
+			height:120px;
+
+		}
+		.ad{
+			width:300px;
+			height:300px;
+			background-image: url(res/ad1.jpg);
+			position: absolute;
+			top:50%;
+			left:50%;
+			margin-left:-150px;
+			margin-top:-150px;
+		}
+	</style>
+</head>
+<body>
+	<h1>video</h1>
+	<div id="video">
+		<video src="res/x.mp4" id="v3"    loop preload="metedata"> 
+		</video>
+		
+		<!-- 广告区域 -->
+		<div class="ad"></div>
+
+		<a class="diyControl">
+			<img src="res/play.png" >
+		</a>
+	</div>
+	<button id="play1"> 播放</button>
+	<button id="pause1"> 暂停</button>
+	<script type="text/javascript">
+		var video = document.getElementById("video");
+		var v3 = document.getElementById("v3");
+		// console.log(v3.paused)	//没有播放视频暂停状态
+		// console.log(v3.volume)	//音量
+		v3.volume=0.8;	//
+
+		v3.playbackRate = 4;	
+
+
+		var play = document.getElementById("play1");
+		var pause  = document.getElementById("pause1");
+
+		var img = document.querySelector(".diyControl img");
+
+		var ad = document.querySelector("#video div.ad")
+
+		play.onclick = function(){
+			v3.play();
+
+		}
+		pause.onclick = function(){
+			v3.pause();
+		}
+
+		// 不使用video自带controls 自定义播放和暂停按钮 
+		//鼠标移进去  显示按钮 
+		//鼠标移出 隐藏
+
+		var diyControl = document.getElementsByClassName("diyControl")[0];
+		diyControl.onclick = function(e){
+			e.preventDefault();
+			if(v3.paused == true){
+					v3.play();
+				img.src="res/pause.png"
+				ad.style.display="none"
+			}else{
+				v3.pause();
+				img.src="res/play.png"
+				ad.style.display="block"
+			}
+		}
+		video.onmouseenter = function(){
+			diyControl.style.display="block";
+		
+		}
+		video.onmouseleave = function(){
+			diyControl.style.display="none"
+
+		}
+	</script>
+</body>
+</html>
