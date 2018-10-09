@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>笑脸</title>
+	<style type="text/css">
+		body{text-align: center;}
+	</style>
+</head>
+<body>
+	<h1>笑脸</h1>
+	<canvas id="c3" width="1000" height="800" style="background: #ddd;"></canvas>
+	<script type="text/javascript">
+		var c3 = document.getElementById("c3");
+		var ctx = c3.getContext("2d");
+
+		/*******哭脸**********/
+		function close(){
+			ctx.beginPath();
+			ctx.arc(200,200,100,0,2*Math.PI)
+			ctx.moveTo(200,200)
+			ctx.lineTo(300,200)
+			var names = "哭脸"
+			ctx.font="20px 楷体"
+			ctx.fillStyle = "#000"
+			ctx.fillText(names,180,320)
+
+			ctx.stroke();
+			// 笑脸文字
+
+			//蓝色圆形
+			ctx.beginPath();
+			ctx.arc(200+40,200-40,30,0,2*Math.PI)
+			ctx.fillStyle = "blue"
+			ctx.fill();
+
+			//白色圆点
+			ctx.beginPath();
+			ctx.arc(200+40+15,200-40-15,5,0,2*Math.PI)
+			ctx.fillStyle = "#fff"
+			ctx.fill();
+
+		}
+		
+
+		/********笑脸*********/
+		function open(){
+			ctx.beginPath();
+			ctx.arc(200,200,100,50*Math.PI/180,350*Math.PI/180)
+			ctx.lineTo(200,200)
+			ctx.closePath()
+			var names = "笑脸"
+			ctx.fillStyle="#000"
+			ctx.font="20px 楷体"
+			ctx.fillText(names,180,320)
+
+			ctx.stroke();
+			ctx.closePath()
+
+			//蓝色圆形
+			ctx.beginPath();
+			ctx.arc(200+40,200-40,30,0,2*Math.PI)
+			ctx.fillStyle = "blue"
+			ctx.fill();
+			//白色圆点
+			ctx.beginPath();
+			ctx.arc(200+40+15-15,200-40-15+10 ,5,0,2*Math.PI)
+			ctx.fillStyle = "#fff"
+			ctx.fill();
+
+		}
+			
+		var float = 0;
+		setInterval(function(){
+			ctx.clearRect(0,0,500,400)
+			float++;
+			if(float%2==0){
+				open();
+			}else {
+				close()
+			}
+		},100)
+		
+		
+	</script>
+</body>
+</html>	
