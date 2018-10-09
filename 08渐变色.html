@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>渐变色</title>
+	<style type="text/css">
+		body{text-align: center;}
+	</style>
+</head>
+<body>
+	<h1>渐变色</h1>
+	<canvas id="c3" width="500" height="400" style="background: #ddd;"></canvas>
+	<script type="text/javascript">
+		var c3 = document.getElementById("c3");
+		var ctx = c3.getContext("2d");
+
+		//1 创建渐变对象
+		var g= ctx.createLinearGradient(0,0,500,0);
+
+		// 2 添加颜色点
+		g.addColorStop(0,"red");
+		g.addColorStop(0.3,"yellow")
+		g.addColorStop(0.6,"pink")
+		g.addColorStop(1,"green")
+
+		//3 赋值填充或描边样式
+		ctx.fillStyle = g;	
+
+		// 绘制
+		ctx.fillRect(0,0,500,30)
+
+		var str = "www.17sucai.com"
+		ctx.font= "40px yahei"
+		ctx.fillText(str,100,100)
+	</script>
+</body>
+</html>
