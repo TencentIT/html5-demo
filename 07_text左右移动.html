@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		body{
+			text-align:center;
+		}
+	</style>
+</head>
+<body>
+
+	<canvas id="c3" width="500" height="400" style="background:#ddd;"></canvas>
+	<script type="text/javascript">
+		var c3 = document.getElementById("c3");
+		var ctx = c3.getContext("2d");
+
+		ctx.font="20px yahei"
+		//获取文本的宽度 必须先绘制文本才能得到精确的宽度
+		var w = ctx.measureText(str).width;
+		console.log(w)
+
+		//左右移动
+		var x=0;
+		var y=185;
+		var xDirection =1;
+		var str = "www.17sucai.com"
+		setInterval(function(){
+			ctx.clearRect(0,0,500,400);
+			x +=1*xDirection;	
+			ctx.strokeText(str,x,y)
+
+			if(x>400) xDirection=-1;
+			else if(x<1) xDirection  = 1;
+		},1)
+
+	</script>
+</body>
+</html>
