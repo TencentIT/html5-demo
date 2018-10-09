@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>绘制矩形</title>
+</head>
+<body>
+	<h1>绘制矩形</h1>
+	<canvas width="500" height="400" id="c3" style="border:1px solid red; background: #ddd">
+		您的浏览器版本太低，请升级
+	</canvas>
+</body>
+<script type="text/javascript">
+	var c3 = document.getElementById("c3");
+	var ctx = c3.getContext("2d")
+
+	ctx.lineWidth=1;	//描边宽度  线条填充
+	ctx.strokeStyle="red";
+	ctx.strokeRect(0,0,100,80);
+
+	ctx.fillStyle="blue"	//实心填充
+	ctx.fillRect(400,0,100,80);
+
+	ctx.clearRect(0,0,101,81)	//清除左上角矩形 清楚的时候注意坐标 都加了1px边框
+
+	//1 
+	// 左上角
+	ctx.fillRect(0,0,100,80);
+	// ctx.fillStyle="red";
+
+	// 左下角
+	ctx.fillRect(0,320,100,80);
+	// ctx.fillStyle="red";
+
+	//右下角
+	ctx.fillRect(400,320,100,80);
+
+	//居中
+		ctx.fillRect(200,160,100,80);
+
+	//2 左右移动的矩形
+	// ctx.fillRect(0,240,100,80);
+
+	var x=0;
+	setInterval(function(){
+		var c3 = document.getElementById("c3");
+		var ctx = c3.getContext("2d");
+		x+=10;
+		ctx.fillRect(x,80,100,80);
+
+		
+		ctx.clearRect(x,80,100,80);
+	},1000)
+
+
+</script>
+</html>
