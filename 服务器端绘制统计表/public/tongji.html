@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>canvas统计表</title>
+	<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+	<style type="text/css">
+		body{
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<h1>canvas统计表</h1>
+	<canvas width="1000" height="400" id="c3" style="background: #ddd">
+		请升级您的浏览器
+	</canvas>
+	<br>
+	<h3>canvas服务端获取数据动态生成销售统计图</h3>
+
+	<script type="text/javascript">
+		var c3 = document.getElementById("c3");
+		var ctx = c3.getContext("2d");
+		// var h ;
+		$.ajax({
+			url:"http://localhost:3000/list",
+			type:"get",
+			dataType:"json",
+			success:function(result){
+				// console.log(result);
+				for(var i=0;i<result.length;i++){
+					var item = result[i];
+					// console.log(item)
+					var h = item.value;
+					// console.log(h)
+					var x = 100*i+50;
+					var y = 400-h;	
+					var w = 50;
+					
+					//随机颜色
+					var r = Math.floor(Math.random()*255);
+					var g = Math.floor(Math.random()*255);
+					var b = Math.floor(Math.random()*255);
+					var color = `rgb(${r},${g},${b})`;
+
+					ctx.fillStyle=color;
+					// console.log(color)
+
+					ctx.fillRect(x,y,w,h);
+				}
+			}
+		})
+
+
+
+	</script>
+</body>
+</html>
