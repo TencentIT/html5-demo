@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>后台绘制统计表</title>
+	<style type="text/css">
+		body{
+			text-align: center;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+</head>
+<body>
+	<h1>销售统计图</h1>
+	<canvas id="sellPic" width="800" height="400px" style="background: #ddd"></canvas>
+	<h1>库存量图</h1>
+	<canvas id="stockPic" width="500px" height="400px" style="background: #ddd"></canvas>
+
+
+	<script type="text/javascript">
+		var sellPic = document.getElementById("sellPic")
+		var ctx = sellPic.getContext("2d")
+		// y轴
+		ctx.beginPath()
+		ctx.moveTo(50,350)	//坐标原点
+		ctx.lineTo(50,50)	
+		ctx.lineTo(50-10,50+10)//left
+		ctx.lineTo(50,50)	
+		ctx.lineTo(50+10,50+10)//right
+		ctx.stroke()
+		// x轴
+
+		var xWidth = 800;	//xWidth 和canvas style里的width 对应 
+		sellPic.style.width=xWidth
+		
+		ctx.beginPath()
+		ctx.moveTo(50,350)	//坐标原点
+		ctx.lineTo(xWidth,350)	 
+		ctx.lineTo(xWidth-10,350-10)	//top
+		ctx.lineTo(xWidth,350)	
+		ctx.lineTo(xWidth-10,350+10)	//bottom
+		ctx.stroke()
+
+		$.ajax({
+			type:"get",
+			url:"http://localhost:3000/product",
+			dataType:"json",
+			success:function(result){
+				console.log(result)
+				for(var i =0;i<result.length;i++){
+					var x = 100*i+50+50
+					var h = result[i].sell_mount
+					var y = 400-h-50
+					var w = 50
+					var color = randomColor()
+					ctx.fillStyle=color
+					ctx.fillRect(x,y,w,h)
+
+					var name = result[i].product_name;
+					//商品名字
+					ctx.beginPath()
+					ctx.font="16px 楷体"
+					ctx.fillStyle="#000"
+					ctx.fillText(name,x,y-10)
+					ctx.fill()
+
+					//月份
+					var month = result[i].month
+					ctx.beginPath()
+					ctx.font="16px 楷体"
+					ctx.fillStyle="#000"
+					ctx.fillText(month+"月",x+15,400-30)
+					ctx.fill()
+
+					//y轴 销量
+					var str1 = "销量"
+					ctx.beginPath()
+					ctx.font="16px 楷体"
+					ctx.fillStyle="#000"
+					ctx.fillText(str1,40,40)
+					ctx.fill()
+
+					//x轴 月份
+					var str2 = "月份"
+					ctx.beginPath()
+					ctx.font="16px 楷体"
+					ctx.fillStyle="#000"
+					ctx.fillText(str2,xWidth-50,350+30)
+					ctx.fill()
+				}
+			}
+		})
+
+		function randomColor(){
+			var r = parseInt(Math.random()*255)
+			var g = parseInt(Math.random()*255)
+			var b = parseInt(Math.random()*255)
+			var color = `rgb(${r},${g},${b})`
+			return color;
+		}
+	</script>
+</body>
+</html>
