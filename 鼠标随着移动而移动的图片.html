@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>随着鼠标移动而移动的图片</title>
+	<style type="text/css">
+		body{
+			text-align: center;
+		}
+		canvas{
+			background: #ddd;
+		}
+	</style>
+</head>
+<body>
+	<h1>随着鼠标移动而移动的图片</h1>
+	<canvas id="c3" width="1000" height="800" ></canvas>
+
+	<script type="text/javascript">
+		var c3 = document.getElementById("c3")
+		var ctx = c3.getContext("2d")
+
+		// 1 创建图片对象
+		var p3 = new Image()
+		//2 下载图片
+		p3.src="res/p3.png"
+
+
+		p3.onload = function(){
+			var w = p3.width
+			var h = p3.height
+			//为画布绑定鼠标移动事件
+			c3.onmousemove = function(e){
+				ctx.clearRect(0,0,1000,800)
+				var x = e.offsetX;
+				var y = e.offsetY;
+				console.log(x,y)
+				ctx.drawImage(p3,x-w/2,y-h/2)
+			}			 
+		}
+	</script>
+</body>
+</html>
