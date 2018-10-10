@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>绘制图片旋转画笔对象</title>
+	<style type="text/css">
+		body{
+			text-align: center;
+		}
+		canvas{
+			background: #ddd;
+		}
+		button{
+			padding:10px 40px;
+			border-radius: 5px;
+			background: #f90;
+			border:0;
+			position: relative;
+			overflow:hidden;
+
+		}
+		button:after{
+			content:"";
+			width:300px;
+			height:40px;	
+			position: absolute;
+			left:-200px;
+			transform:rotate(120deg);
+			background: #fff;
+			opacity:.5;
+			transition:all .5s ease;
+
+		}
+		button:hover:after{
+			left:100%;
+			top:0;
+		}
+	</style>
+</head>
+<body>
+	<h1>绘制图片2张图片旋转画笔对象</h1>
+
+
+	<button>绘制图片2张图片旋转画笔对象</button>
+	<br><br><br><br><br><br>
+
+	<canvas id="c3" width="1000" height="800" ></canvas>
+
+	<script type="text/javascript">
+		var c3 = document.getElementById("c3")
+		var ctx = c3.getContext("2d")
+
+		var p3 = new Image();
+		p3.src="res/p3.png"
+		p3.onload = function(){
+
+		 
+
+			//弧度
+			var deg1= 10*Math.PI/180;	//第一张图片旋转角度
+			var deg2 =20*Math.PI/180	//第二张图片旋转角度
+		 	var w = p3.width;
+		 	var h = p3.height;
+			setInterval(function(){
+				//第一张
+				ctx.save()	//画之前先保存
+				ctx.translate(200,100)
+				ctx.rotate(deg1)
+				ctx.drawImage(p3,0-w/2,0-h/2)
+				ctx.restore()	//画之后恢复
+				deg1+=10
+
+				//第二张
+				ctx.save()
+				ctx.translate(600,100)
+				ctx.rotate(deg2)
+				ctx.drawImage(p3,0-w/2,0-h/2)
+				ctx.restore()
+				deg2+=20
+			},10)
+
+		}
+	</script>
+
+</body>
+</html>

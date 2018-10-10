@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>绘制图片</title>
+	<style type="text/css">
+		body{
+			text-align: center;
+		}
+		canvas{
+			background: #ddd;
+		}
+	</style>
+</head>
+<body>
+	<h1>绘制图片</h1>
+	<canvas id="c3" width="1000" height="800" ></canvas>
+
+	<script type="text/javascript">
+		var c3 = document.getElementById("c3")
+		var ctx = c3.getContext("2d")
+
+		// 1 创建图片对象
+		var p3 = new Image()
+		//2 下载图片
+		p3.src="res/p3.png"
+
+
+		p3.onload = function(){
+			var w = p3.width;
+			var h = p3.height;
+			//拉伸操作  （存在模糊的问题）
+			ctx.drawImage(p3,0,0)	
+			ctx.drawImage(p3,1000-w,0)
+			ctx.drawImage(p3,0,800-h)
+			ctx.drawImage(p3,1000-w,800-h)
+
+			
+		}
+	</script>
+</body>
+</html>
